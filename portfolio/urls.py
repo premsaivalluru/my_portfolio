@@ -10,5 +10,4 @@ urlpatterns = [
     path('filter-projects/', views.filter_projects, name='filter_projects'),
     path('submit_contact_form/', views.submit_contact_form, name='submit_contact_form'),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
