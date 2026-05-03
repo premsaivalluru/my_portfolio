@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <script src="{% static 'script.js' %}" defer></script>
+</head>
+<body>
+    <nav id="desktop-nav">
+        <ul>
+            <li><a href="#intro">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+    <div class="mobile-header">
+        <h1>My Portfolio</h1>
+        <nav class="mobile-nav"><i id="menu-btn" class="fas fa-bars"></i></nav>
+    </div>
+    <ul id="mobile-menu">
+        <li><a href="#intro">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+    </ul>
+    <main>
+        <div id="intro" class="fade-in">
+            <div class="my-intro">
+                <h1>Welcome to My Portfolio!</h1>
+                <h2><span id="typing" data-text="A Passionate Python Developer"></span></h2>
+                <p>I'm a passionate Python Developer with experience in building web applications. I enjoy learning new technologies and solving complex problems.</p>
+                <div class="hire-about">
+                    <a href="#contact" class="btn">Hire Me</a>
+                    <a href="#about" class="btn">About Me</a>
+                </div>
+            </div>
+            <div class="my-pic-container"></div>
+        </div>
+        <div id="about" class="fade-in">
+            <h2 id="abt-heading">ABOUT</h2>
+            <hr id="abt-hr">
+            <div class="desktop-about">
+                <div class="my-pic-2"></div>
+                <div class="about-me">
+                    <div class="intro-education desktop">
+                        <div class="introduction">
+                            <h3>INTRODUCTION</h3>
+                            <hr><br>
+                            <p>I am a software developer with a strong background in web development. I have experience working with various programming languages and frameworks, and I am always eager to learn new technologies.</p>
+                        </div>
+                        <div class="education">
+                            <h3>EDUCATION & GOALS</h3>
+                            <hr><br>
+                            <div class="education-details">
+                                <div class="degree-details">
+                                    <span class="degree left"><strong>Degree</strong></span>
+                                    <span>:</span>
+                                    <span class="right">Bachelor of Technology (BTech) in Computer Science and Information Technology (CSIT)</span>
+                                </div>
+                                <div class="institution-details">
+                                    <span class="institution left"><strong>Institution</strong></span>
+                                    <span>:</span>
+                                    <span class="right">MVGR College of Engineering</span>
+                                </div>
+                                <div class="time-line">
+                                    <span class="timeline left"><strong>Timeline</strong></span>
+                                    <span>:</span>
+                                    <span class="right">2023 - 2027</span>
+                                </div>
+                                <div class="vision-details">
+                                    <span class="vision left"><strong>Vision</strong></span>
+                                    <span>:</span>
+                                    <span class="right">To become a leading software engineer and contribute to innovative projects that make a positive impact.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills">
+                        <h3>SKILLS</h3>
+                        <hr>
+                        <h3>Programming Languages:</h3>
+                        <ul>
+                            <li><i class="fab fa-python"></i> Python</li>
+                            <li><i class="fab fa-html5"></i> HTML5</li>
+                            <li><i class="fab fa-css3-alt"></i> CSS</li>
+                            <li><i class="fab fa-js"></i> JavaScript</li>
+                            <li><i class="fab fa-java"></i> Java</li>
+                            <li><i class="devicon-mysql-plain"></i>SQL</li>
+                        </ul>
+                        <h3>Frameworks and Libraries:</h3>
+                        <ul>
+                            <li><i class="devicon-django-plain"></i> Django</li>
+                            <li><i class="devicon-flask-original"></i> Flask</li>
+                            <li><i class="fab fa-twilio"></i> Twilio</li>
+                            <li><i class="fab fa-react"></i> React</li>
+                        </ul>
+                        <h3>Tools and Technologies:</h3>
+                        <ul>
+                            <li><i class="fab fa-git-alt"></i> Git</li>
+                            <li><i class="fas fa-brain"></i> AIML</li>
+                            <li><i class="fas fa-database"></i> DBMS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="projects" class="fade-in">
+            <h2>PROJECTS</h2>
+            <hr id="projects-hr">
+            <div class="domain-filters">
+                <ul>
+                    <li class="active"><a href="#" class="filter-btn" data-domain="all">All</a></li>
+                    <li><a href="#" class="filter-btn" data-domain="web">Web Dev</a></li>
+                    <li><a href="#" class="filter-btn" data-domain="Python">Python</a></li>
+                    <li><a href="#" class="filter-btn" data-domain="ML">ML</a></li>
+                </ul>
+            </div>
+            <div class="projects-container">
+                {% for project in projects %}
+                    <div class="project-card">
+                        <div class="project-image" style="background-image: url('{{ project.image.url }}');"></div>
+                        <div class="project-info">
+                            <h3>{{ project.title }}</h3>
+                            <br>
+                            <p>{{ project.short_description }}</p>
+                            <br>
+                            <ul class="project-tech">
+                                {% for tech in project.tech_stack.all %}
+                                    {% if tech.name == "Python" %}
+                                        <li><i class="fab fa-python"></i> Python</li>
+                                    {% elif tech.name == "Django" %}
+                                        <li><i class="devicon-django-plain"></i> Django</li>
+                                    {% elif tech.name == "HTML5" %}
+                                        <li><i class="fab fa-html5"></i> HTML5</li>
+                                    {% elif tech.name == "CSS3  " %}
+                                        <li><i class="fab fa-css3-alt"></i> CSS3</li>
+                                    {% elif tech.name == "JavaScript" %}
+                                        <li><i class="fab fa-js"></i> JavaScript</li>
+                                    {% elif tech.name == "Flask"%}
+                                        <li><i class="devicon-flask-original"></i> Flask</li>
+                                    {% elif tech.name == "React" %}
+                                        <li><i class="fab fa-react"></i> React</li>
+                                    {% elif tech.name == "Twilio" %}
+                                        <li><i class="fab fa-twilio"></i> Twilio</li>
+                                    {% elif tech.name == "Git" %}
+                                        <li><i class="fab fa-git-alt"></i> Git</li>
+                                    {% elif tech.name == "AIML" %}
+                                        <li><i class="fas fa-brain"></i> AIML</li>
+                                    {% elif tech.name == "DBMS" %}
+                                        <li><i class="fas fa-database"></i> DBMS</li>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                            <div class="view-project">
+                                <a class="btn" href="{{ project.github_link }}" target="_blank">GitHub</a>
+                                <a class="btn" href="{% url 'project_details' project.pk %}">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="contact" class="fade-in">
+            <h2>GET IN TOUCH</h2>
+            <hr id="contact-hr">
+            <div class="contact-me">
+                <form class="contact-form" method="post" action="{% url 'submit_contact_form' %}">
+                    {% csrf_token %}
+                    <label for="email-id">Your Email: </label>
+                    <input id="email-id" name="email" type="email" placeholder="Enter your email" required>
+                    <label for="subject">Subject:</label>
+                    <input id="subject" name="subject" type="text" placeholder="Enter the subject" required>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="message" rows="6" placeholder="Detailed description" required></textarea>
+                    <button type="submit" class="submit-btn btn">Submit</button>
+                </form>
+                <div class="social-media">
+                    <h3>Connect on Social Media</h3>
+                    <hr id="social-media-hr">
+                    <div class="social-media-icons">
+                        <a href="mailto:yourmail@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                        <a href="https://linkedin.com/in/premsaivalluru" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/premsaivalluru" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://wa.me/919391530779" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Display success or error messages
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>
