@@ -1,5 +1,5 @@
 import json
-from .email_send_otp import send_email
+from .email_send_otp import send_email_async
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import *
@@ -73,7 +73,7 @@ def submit_contact_form(request):
         
         # Here you can handle the form data, e.g., save it to the database or send an email
         try:
-            send_email(subject, message)
+            send_email_async(subject, message)
             messages.success(request, "Your email has been sent successfully!")
         except Exception as e:
             messages.error(request, "There was an error sending your email. Please try again later.")
