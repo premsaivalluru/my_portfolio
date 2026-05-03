@@ -1,16 +1,18 @@
 import smtplib
 from email.message import EmailMessage
-from pathlib import Path
-import mimetypes
 import os
+import threading
 from dotenv import load_dotenv
-import random
 
 load_dotenv()
 
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
 
+
+# -----------------------------
+# CORE EMAIL FUNCTION (BLOCKING)
+# -----------------------------
 def send_email(subject, body):
     receiver_email = "vallurupremsai590@gmail.com"
 
@@ -34,3 +36,14 @@ def send_email(subject, body):
     except Exception as e:
         print(f"Failed to send email: {e}")
         return {"status": "failure", "message": str(e)}
+
+
+# -----------------------------
+# NON-BLOCKING WRAPPER (USE THIS IN VIEWS)
+# -----------------------------
+def send_email_async(subject, body):
+    threading.Thread(
+        target=send_email,
+        args=(subject, body),
+        daemon=True
+    ).start()
