@@ -1,10 +1,11 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='project_images/')
+    image = CloudinaryField('image')
     github_link = models.URLField(blank=True, null=True)
     execution_link = models.URLField(blank=True, null=True)
     features = models.JSONField(blank=True, null=True, default=list)
@@ -25,7 +26,7 @@ class Project(models.Model):
 class ProjectScreenshot(models.Model):
     name = models.CharField(max_length=200, default='Screenshot')
     project = models.ForeignKey(Project, related_name='screenshots', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='project_screenshots/')
+    image = CloudinaryField('image')
 
     def __str__(self):
         return f"Screenshot for {self.project.title}"
