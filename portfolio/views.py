@@ -8,6 +8,7 @@ from django.contrib import messages
 # Create your views here.
 def home(request):
     projects = Project.objects.all().prefetch_related('tech_stack', 'screenshots')
+    print(project.title, project.image)
     context = {
         'projects': projects
     }
