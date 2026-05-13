@@ -9,9 +9,19 @@ from django.contrib import messages
 
 from django.contrib.auth.models import User
 
-u = User.objects.get(username='Prem')
-u.set_password('idiot_04')
-u.save()
+try:
+    u = User.objects.get(username='Prem')
+    u.set_password('newpassword')
+    u.save()
+    print("Password updated")
+
+except User.DoesNotExist:
+    User.objects.create_superuser(
+        username='Prem',
+        email='yourmail@gmail.com',
+        password='newpassword'
+    )
+    print("Superuser created")
 
 def home(request):
     projects = Project.objects.all().prefetch_related('tech_stack', 'screenshots')
