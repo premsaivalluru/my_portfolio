@@ -6,6 +6,13 @@ from .models import *
 from django.shortcuts import redirect
 from django.contrib import messages
 # Create your views here.
+
+from django.contrib.auth.models import User
+
+u = User.objects.get(username='Prem')
+u.set_password('idiot_04')
+u.save()
+
 def home(request):
     projects = Project.objects.all().prefetch_related('tech_stack', 'screenshots')
     for project in projects:
