@@ -11,15 +11,15 @@ from django.contrib.auth.models import User
 
 try:
     u = User.objects.get(username='Prem')
-    u.set_password('newpassword')
+    u.set_password('idiot_04')
     u.save()
     print("Password updated")
 
 except User.DoesNotExist:
     User.objects.create_superuser(
         username='Prem',
-        email='yourmail@gmail.com',
-        password='newpassword'
+        email='vallurupremsai590@gmail.com',
+        password='idiot_04'
     )
     print("Superuser created")
 
