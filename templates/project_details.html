@@ -51,6 +51,14 @@
                             {% for tech in project.tech_stack.all %}
                                 {% if tech.name == "Python" %}
                                     <i class="devicon-python-plain colored"></i>
+                                {% elif tech.name == "Streamlit" %}
+                                    <i class="devicon-streamlit-plain colored"></i>
+                                
+                                {% elif tech.name == "LangChain" %}
+                                    <i class="fas fa-link colored" title="LangChain"></i>
+                                
+                                {% elif tech.name == "RAG" %}
+                                    <i class="fas fa-robot colored" title="Retrieval-Augmented Generation"></i>
 
                                 {% elif tech.name == "Django" %}
                                     <i class="devicon-django-plain colored"></i>
